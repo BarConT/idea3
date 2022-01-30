@@ -1,0 +1,53 @@
+{% extends "base_template.html" %}
+
+{% block title %}PIZZERÍA DON REMOLO{% endblock %}
+
+{% block content %}
+
+<h2>¡Pide lo que quieras y te lo llevamos gratis!</h2>
+
+<h2>Pizzas</h2>
+{% for comida in comidas %}
+    {% if comida.categoria == 'Pizzas'%}
+    <div>   
+        <h3>{{ comida.nombre }} </h3>
+        <p>${{ comida.precio }}</p>
+        <button>Agregar al carrito</button>
+    </div>
+    {% endif%}
+{% endfor %}
+
+<h2>Empanadas</h2>
+{% for comida in comidas %}
+    {% if comida.categoria == 'Empanadas'%}
+    <div>   
+        <h3>{{ comida.nombre }} </h3>
+        <p>${{ comida.precio }}</p>
+        <button>Agregar al carrito</button>
+    </div>
+    {% endif%}
+{% endfor %}
+
+<h2>Bebidas</h2>
+{% for comida in comidas %}
+    {% if comida.categoria == 'Bebidas'%}
+    <div>   
+        <h3>{{ comida.nombre }} </h3>
+        <p>${{ comida.precio }}</p>
+        <button>Agregar al carrito</button>
+    </div>
+    {% endif%}
+{% endfor %}
+
+<h2>Postres y Helados</h2>
+{% for comida in comidas %}
+    {% if comida.categoria == 'Postres y Helados'%}
+    <div>   
+        <h3>{{ comida.nombre }} </h3>
+        <p>${{ comida.precio }}</p>
+        <button>Agregar al carrito</button>
+    </div>
+    {% endif%}
+{% endfor %}
+
+{% endblock%}
