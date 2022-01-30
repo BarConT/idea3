@@ -1,14 +1,17 @@
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
+from run import db
 
+class User(db.Model, UserMixin):
 
-class User(UserMixin):
+    __tablename__ = 'idea3_user'
 
-    def __init__(self, id, name, password):
-        self.id = id
-        self.name = name 
-        self.password = password   
-        # self.password = generate_password_hash(password)
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(80), nullable=False) 
+    password = db.Column(db.String(128), nullable=False)
+
+    def __repr__(self):
+            return '<User {}>'.format(self.name)
 
     def set_password(self, password):
         self.password = generate_password_hash(password)
@@ -16,15 +19,49 @@ class User(UserMixin):
     def check_password(self, password):
         return check_password_hash(self.password, password)
 
+    def save(self):
+        if not self.id:
+            db.session.add(self)
+        db.session.commit()
+
+    @staticmethod
+    def get_by_id(id):
+        return User.query.get(id)
+
+    @staticmethod
+    def get_by_name(name):
+        return User.query.filter_by(name=name).first()
+
+class Comida(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    categoria_id = db.Column(db.Integer, db.ForeignKey('categoria.id', ondelete='CASCADE'), nullable=False)
+    nombre = db.Column(db.String(256), nullable=False)
+    precio = db.Column(db.Integer, nullable=False)
+    
     def __repr__(self):
-        return '<User {}>'.format(self.name)
+        return f'<Comida {self.nombre}>'
 
-users = []
-user = User(1 , 'admin', 'pbkdf2:sha256:150000$5oClIM0i$c155be080802a2299bf20f891ea9e542c8fb11ea4a5927d390c36d2d91252a60')
-users.append(user)
+    def save(self):
+        if not self.id:
+            db.session.add(self)
+        db.session.commit()
 
-def get_user(name):
-    for user in users:
-        if user.name == name:
-            return user
-    return None
+    @staticmethod
+    def get_by_categoria(categoria_id):
+        return Comida.query.filter_by(categoria=categoria_id).first() #quitar el first() o query.all()
+    
+    @staticmethod
+    def get_by_id(id):
+        return Comida.query.filter_by(id=id).first()
+
+    @staticmethod
+    def get_all():
+        return Comida.query.all()
+
+class Categoria(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    nombre_categoria = db.Column(db.String(256), nullable=False)
+
+    @staticmethod
+    def get_all():
+        return Categoria.query.all()

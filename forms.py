@@ -1,10 +1,10 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, IntegerField, PasswordField, BooleanField
+from wtforms import StringField, SubmitField, IntegerField, PasswordField, BooleanField, SelectField
 from wtforms.validators import DataRequired, Length
 
 class ComidaForm(FlaskForm):
     nombre = StringField('Título', validators=[DataRequired(), Length(max=128)])
-    categoria = StringField('Categoría')
+    categoria = SelectField('Categoria', choices=[])
     precio = IntegerField()
     submit = SubmitField('Enviar')
 

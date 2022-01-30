@@ -12,7 +12,11 @@
     <div>   
         <h3>{{ comida.nombre }} </h3>
         <p>${{ comida.precio }}</p>
-        <button>Agregar al carrito</button>
+        {% if current_user.is_anonymous %}
+            <button>Agregar al carrito</button>
+        {% else %}
+            <button>Editar Producto</button>
+        {% endif %}
     </div>
     {% endif%}
 {% endfor %}
@@ -23,7 +27,11 @@
     <div>   
         <h3>{{ comida.nombre }} </h3>
         <p>${{ comida.precio }}</p>
-        <button>Agregar al carrito</button>
+        {% if current_user.is_anonymous %}
+            <button>Agregar al carrito</button>
+        {% else %}
+            <button>Editar Producto</button>
+        {% endif %}
     </div>
     {% endif%}
 {% endfor %}
@@ -34,7 +42,11 @@
     <div>   
         <h3>{{ comida.nombre }} </h3>
         <p>${{ comida.precio }}</p>
-        <button>Agregar al carrito</button>
+        {% if current_user.is_anonymous %}
+            <button>Agregar al carrito</button>
+        {% else %}
+            <button>Editar Producto</button>
+        {% endif %}
     </div>
     {% endif%}
 {% endfor %}
@@ -45,9 +57,21 @@
     <div>   
         <h3>{{ comida.nombre }} </h3>
         <p>${{ comida.precio }}</p>
-        <button>Agregar al carrito</button>
+        {% if current_user.is_anonymous %}
+            <button>Agregar al carrito</button>
+        {% else %}
+            <button>Editar Producto</button>
+        {% endif %}
     </div>
     {% endif%}
 {% endfor %}
+
+
+
+
+{% for categoria in categorias %}
+    <h1>{{ categoria.nombre_categoria }}</h1>
+{% endfor%}
+
 
 {% endblock%}
