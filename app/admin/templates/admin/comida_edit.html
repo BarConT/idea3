@@ -1,0 +1,41 @@
+{% extends "base_template.html" %}
+
+{% block title %}
+    Editar Comida
+{% endblock %}
+
+{% block content %}
+    <form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+
+        <div>
+            <h1>{{selected}}</h1>
+            {{ form.categoria.label }}
+            {{ form.categoria }}
+            {% for error in form.categoria.errors %}
+            <span style="color: red;">{{ error }}</span>
+            {% endfor %}
+        </div>
+        
+        <div>
+            {{ form.nombre.label }}
+            {{ form.nombre(size=128) }}<br>
+            {% for error in form.nombre.errors %}
+            <span style="color: red;">{{ error }}</span>
+            {% endfor %}
+        </div>
+        
+        <div>
+            {{ form.precio.label }}
+            {{ form.precio }}<br>
+            {% for error in form.precio.errors %}
+            <span style="color: red;">{{ error }}</span>
+            {% endfor %}
+        </div>
+        
+        <div>
+            {{ form.submit() }}
+        </div>
+    </form>
+    
+{% endblock %}

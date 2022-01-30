@@ -4,74 +4,28 @@
 
 {% block content %}
 
-<h2>¡Pide lo que quieras y te lo llevamos gratis!</h2>
-
-<h2>Pizzas</h2>
-{% for comida in comidas %}
-    {% if comida.categoria == 'Pizzas'%}
-    <div>   
-        <h3>{{ comida.nombre }} </h3>
-        <p>${{ comida.precio }}</p>
-        {% if current_user.is_anonymous %}
-            <button>Agregar al carrito</button>
-        {% else %}
-            <button>Editar Producto</button>
-        {% endif %}
-    </div>
-    {% endif%}
-{% endfor %}
-
-<h2>Empanadas</h2>
-{% for comida in comidas %}
-    {% if comida.categoria == 'Empanadas'%}
-    <div>   
-        <h3>{{ comida.nombre }} </h3>
-        <p>${{ comida.precio }}</p>
-        {% if current_user.is_anonymous %}
-            <button>Agregar al carrito</button>
-        {% else %}
-            <button>Editar Producto</button>
-        {% endif %}
-    </div>
-    {% endif%}
-{% endfor %}
-
-<h2>Bebidas</h2>
-{% for comida in comidas %}
-    {% if comida.categoria == 'Bebidas'%}
-    <div>   
-        <h3>{{ comida.nombre }} </h3>
-        <p>${{ comida.precio }}</p>
-        {% if current_user.is_anonymous %}
-            <button>Agregar al carrito</button>
-        {% else %}
-            <button>Editar Producto</button>
-        {% endif %}
-    </div>
-    {% endif%}
-{% endfor %}
-
-<h2>Postres y Helados</h2>
-{% for comida in comidas %}
-    {% if comida.categoria == 'Postres y Helados'%}
-    <div>   
-        <h3>{{ comida.nombre }} </h3>
-        <p>${{ comida.precio }}</p>
-        {% if current_user.is_anonymous %}
-            <button>Agregar al carrito</button>
-        {% else %}
-            <button>Editar Producto</button>
-        {% endif %}
-    </div>
-    {% endif%}
-{% endfor %}
-
-
+{% if current_user.is_anonymous %}
+    <h1>¡Pide lo que quieras y te lo llevamos gratis!</h1>                
+{% endif %}
 
 
 {% for categoria in categorias %}
-    <h1>{{ categoria.nombre_categoria }}</h1>
+    <h2>{{ categoria.nombre_categoria }}</h2>
+    {% for comida in comidas %}
+        {% if comida.categoria_id == categoria.nombre_categoria %}
+            <div>
+                <h3>{{ comida.nombre }} </h3>
+                <p>${{ comida.precio }}</p>
+                {% if current_user.is_anonymous %}
+                    <button><a href="{{ url_for('public.vista_pedido') }}">Agregar al carrito</a></button>
+                {% else %}
+                    <button><a href="{{ url_for('admin.editar_comida', id_comida=comida.id) }}">Editar Producto</a></button>
+                    <button><a href="{{ url_for('admin.eliminar_comida', id_comida=comida.id) }}">Eliminar Producto</a></button>
+                {% endif %}
+            </div>
+            {% endif %}
+    {% endfor %}
+    <hr>
 {% endfor%}
-
 
 {% endblock%}

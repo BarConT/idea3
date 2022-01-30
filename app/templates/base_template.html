@@ -16,6 +16,7 @@
                 
             {% else %}
                 <li>{{ current_user.name }}</li>
+                <li><a href="{{ url_for('admin.comida_form') }}">Nueva Comida</a></li>
                 <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
             {% endif %}
         </ul>

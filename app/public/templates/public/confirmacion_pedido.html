@@ -1,7 +1,15 @@
 {% extends 'base_template.html' %}
 
+{% block title %}Confirmación de pedido{% endblock %}
+
 {% block content %}
 
-    Confirmación de pedido desde templates
+{% if current_user.is_anonymous %}
+    <h1>Confirmación de pedido</h1>
+    <button><a href="{{ url_for('public.vista_pedido') }}">Atrás</a></button>
+    <button><a href="https://api.whatsapp.com/send?phone=+5493463647840&text=Hola%2C+estoy+interesado+en+el+producto+mi+direccion+es" target="blank">Confirmar pedido</a></button>
+{% else %}
+    <h1>El ADMIN no puede comprar</h1>
+{% endif %}
 
 {% endblock %}

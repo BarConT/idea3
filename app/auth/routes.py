@@ -19,7 +19,7 @@ def login():
     if form.validate_on_submit():
         user = User.get_by_name(form.name.data)
         if user is not None and user.check_password(form.password.data):
-            login_user(user, remember=form.remember_me.data)
+            login_user(user)
             next_page = request.args.get('next')
             if not next_page or url_parse(next_page).netloc != '':
                 next_page = url_for('public.index')

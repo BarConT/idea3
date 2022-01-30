@@ -14,13 +14,21 @@ class Comida(db.Model):
             db.session.add(self)
         db.session.commit()
 
-    @staticmethod
-    def get_by_categoria(categoria_id):
-        return Comida.query.filter_by(categoria=categoria_id).first() #quitar el first() o query.all()
-    
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
+
     @staticmethod
     def get_by_id(id):
-        return Comida.query.filter_by(id=id).first()
+        return Comida.query.get(id)
+
+    # @staticmethod
+    # def get_by_categoria(categoria_id):
+    #     return Comida.query.filter_by(categoria=categoria_id).first() #quitar el first() o query.all()
+    
+    # @staticmethod
+    # def get_by_id(id):
+    #     return Comida.query.filter_by(id=id).first()
 
     @staticmethod
     def get_all():

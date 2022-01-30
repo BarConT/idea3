@@ -4,6 +4,12 @@
 
 {% block content %}
 
-    Vista de pedido desde templates
-
+{% if current_user.is_anonymous %}
+    <h2>Tu pedido</h2>
+    <h2>Tus datos</h2>
+    <button><a href="{{ url_for('public.index') }}">Seguir comprando</a></button>
+    <button><a href="{{ url_for('public.confirmacion_pedido')}}">Finalizar compra</a></button>
+{% else %}
+    <h1>El ADMIN no puede comprar</h1>
+{% endif %}
 {% endblock %}

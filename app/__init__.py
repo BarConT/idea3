@@ -1,5 +1,5 @@
 import os
-from flask import Flask
+from flask import Flask, render_template
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 login_manager = LoginManager()
@@ -22,7 +22,21 @@ def create_app():
     app.register_blueprint(admin_bp)
     from .public import public_bp
     app.register_blueprint(public_bp)
+ 
+    # Manejo de errores personalizados
+    register_error_handlers(app)
+ 
     return app
+
+def register_error_handlers(app):
+
+    @app.errorhandler(500)
+    def base_error_handler(e):
+        return render_template('500.html'), 500
+
+    @app.errorhandler(404)
+    def error_404_handler(e):
+        return render_template('404.html'), 404
 
     
 
