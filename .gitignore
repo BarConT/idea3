@@ -1,4 +1,4 @@
-/idea3env
+idea3env/
 /instance
 __pycache__/
 database.db
