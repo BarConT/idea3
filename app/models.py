@@ -5,6 +5,7 @@ class Comida(db.Model):
     categoria_id = db.Column(db.Integer, db.ForeignKey('categoria.id', ondelete='CASCADE'), nullable=False)
     nombre = db.Column(db.String(256), nullable=False)
     precio = db.Column(db.Integer, nullable=False)
+    imagen = db.Column(db.String)
     
     def __repr__(self):
         return f'<Comida {self.nombre}>'

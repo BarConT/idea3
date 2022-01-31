@@ -3,7 +3,14 @@ body {
     padding: 0;
     font-size: 100%;
     line-height: 1.5;
-    background-color: aquamarine;
+}
+
+.container {
+    width: 85%;
+    margin: auto;
+    min-height: 100vh;
+    padding: 30px;
+    background-color: #E5E5E5;
 }
 
 h1, h2, h3, h4 {

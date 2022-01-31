@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-    <form action="" method="post" novalidate>
+    <form action="" method="post" enctype="multipart/form-data" novalidate>
         {{ form.hidden_tag() }}
 
         <div>
@@ -18,7 +18,7 @@
         
         <div>
             {{ form.nombre.label }}
-            {{ form.nombre(size=128) }}<br>
+            {{ form.nombre(size=60) }}<br>
             {% for error in form.nombre.errors %}
             <span style="color: red;">{{ error }}</span>
             {% endfor %}
@@ -28,6 +28,14 @@
             {{ form.precio.label }}
             {{ form.precio }}<br>
             {% for error in form.precio.errors %}
+            <span style="color: red;">{{ error }}</span>
+            {% endfor %}
+        </div>
+
+        <div>
+            {{ form.comida_image.label }}
+            {{ form.comida_image }}<br>
+            {% for error in form.comida_image.errors %}
             <span style="color: red;">{{ error }}</span>
             {% endfor %}
         </div>

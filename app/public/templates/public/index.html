@@ -14,6 +14,11 @@
     {% for comida in comidas %}
         {% if comida.categoria_id == categoria.nombre_categoria %}
             <div>
+                {% if comida.imagen %}
+                <div>
+                    <img src="{{ url_for('media_comida', filename=comida.imagen) }}" width="200px" />
+                </div>
+                {% endif %}
                 <h3>{{ comida.nombre }} </h3>
                 <p>${{ comida.precio }}</p>
                 {% if current_user.is_anonymous %}
@@ -23,6 +28,7 @@
                     <button><a href="{{ url_for('admin.eliminar_comida', id_comida=comida.id) }}">Eliminar Producto</a></button>
                 {% endif %}
             </div>
+            <br>
             {% endif %}
     {% endfor %}
     <hr>
