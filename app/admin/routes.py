@@ -1,4 +1,5 @@
 import os
+from os import remove
 from flask import render_template, redirect, url_for, current_app
 from flask_login import login_required
 from werkzeug.exceptions import NotFound
@@ -63,5 +64,7 @@ def eliminar_comida(id_comida):
     comida = Comida.get_by_id(id_comida)
     if comida is None:
         raise NotFound(id_comida)
+    images_dir = current_app.config['COMIDAS_IMAGES_DIR']
+    remove(os.path.join(images_dir, comida.imagen))
     comida.delete()
     return redirect(url_for('public.index'))
