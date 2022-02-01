@@ -1,6 +1,6 @@
 {% extends 'base_template.html' %}
 
-{% block title %}Vista Pedido{% endblock %}
+{% block title %}Vista Pedido {% if num_articulos %} {{ num_articulos }}{% endif %}{% endblock %}
 
 {% block content %}
 
@@ -43,22 +43,23 @@
             <h3>Carrito vacío, compra algún producto</h3>
         {% endif %}
     </table>
-
-    <h2>Tus datos</h2>
-    <form action="">
-        <input type="text" placeholder="Nombre y apellido">
-        <br>
-        <input type="text" placeholder="Dirección">
-    </form>
-
     <button><a href="{{ url_for('public.index') }}">Seguir comprando</a></button>
     {% if total != 0 %}
     <button><a href="{{ url_for('carrito.vaciar_carrito') }}">VACIAR CARRITO</a></button>
-    <button><a href="{{ url_for('public.confirmacion_pedido')}}">Finalizar compra</a></button>
+
+    <h2>Tus datos</h2>
+    <h3>Datos de envío</h3>
+    <form action="" method="POST">
+        <input type="text" placeholder="Nombre y apellido" name="nombre" required>
+        <br>
+        <input type="text" placeholder="Dirección: Calle/ nro / casa o dpto" name="direccion" required>
+        <br>
+        <input type="submit" value="Finalizar compra">
+    </form>   
+    
     {% endif %}
 
-    <p>*Solo se recibirán pagos en efectivo.</p>
-    <p>Procure tener el monto exacto.</p>
+
     
 {% else %}
     <h1>El ADMIN no puede comprar</h1>
