@@ -14,7 +14,7 @@
                 <li><a href="{{ url_for('public.index') }}">Home</a></li>
                 {% if current_user.is_anonymous %}
                 <li><a href="{{ url_for('auth.login') }}">Login</a></li>
-                <li><a href="{{ url_for('public.vista_pedido') }}">CARRITO</a></li>    
+                <li><a href="{{ url_for('carrito.vista_pedido') }}">CARRITO</a></li>    
                 {% else %}
                     <li>{{ current_user.name }}</li>
                     <li><a href="{{ url_for('admin.comida_form') }}">Nueva Comida</a></li>

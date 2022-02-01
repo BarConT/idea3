@@ -1,5 +1,4 @@
 import os
-# from os.path import abspath, dirname, join
 from flask import Flask, render_template
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
@@ -36,6 +35,8 @@ def create_app():
     app.register_blueprint(admin_bp)
     from .public import public_bp
     app.register_blueprint(public_bp)
+    from .carrito import carrito_bp
+    app.register_blueprint(carrito_bp)
  
     # Manejo de errores personalizados
     register_error_handlers(app)

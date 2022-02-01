@@ -1,0 +1,56 @@
+{% extends 'base_template.html' %}
+
+{% block title %}Vista Pedido{% endblock %}
+
+{% block content %}
+
+{% if current_user.is_anonymous %}
+
+    <h2>Tu pedido</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Precio</th>
+                <th>Cantidad</th>
+                <th>Subtotal</th>
+                <th>Eliminar</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for comida in comidas %}
+            <tr>
+                <td>{{ comida[0].nombre}}</td>
+                <td>$ {{ comida[0].precio }}</td>
+                <td >
+					<a href="{{ url_for('carrito.carrito_restar', id=comida[0].id) }}">-</a>
+					&nbsp&nbsp{{ comida[1] }}&nbsp&nbsp
+					<a href="{{ url_for('carrito.carrito_sumar', id=comida[0].id) }}">+</a>
+				</td>
+                <td>$ {{ comida[0].precio * comida[1] }}</td>
+                <td><a href="{{ url_for('carrito.carrito_delete', id=comida[0].id) }}">&nbsp&nbsp&nbsp&nbsp&nbsp&nbspX</a></td>
+            </tr>
+            {% endfor %}
+            
+        </tbody>
+        <tfoot>
+            <tr>
+                <td>Total: $ {{ total }}</td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <h2>Tus datos</h2>
+    <form action="">
+        <input type="text" placeholder="Nombre y apellido">
+        <br>
+        <input type="text" placeholder="Dirección">
+    </form>
+
+    <button><a href="{{ url_for('public.index') }}">Seguir comprando</a></button>
+    <button><a href="{{ url_for('public.confirmacion_pedido')}}">Finalizar compra</a></button>
+{% else %}
+    <h1>El ADMIN no puede comprar</h1>
+{% endif %}
+{% endblock %}

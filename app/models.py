@@ -23,14 +23,6 @@ class Comida(db.Model):
     def get_by_id(id):
         return Comida.query.get(id)
 
-    # @staticmethod
-    # def get_by_categoria(categoria_id):
-    #     return Comida.query.filter_by(categoria=categoria_id).first() #quitar el first() o query.all()
-    
-    # @staticmethod
-    # def get_by_id(id):
-    #     return Comida.query.filter_by(id=id).first()
-
     @staticmethod
     def get_all():
         return Comida.query.all()
