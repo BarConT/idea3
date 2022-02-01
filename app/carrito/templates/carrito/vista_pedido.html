@@ -5,9 +5,9 @@
 {% block content %}
 
 {% if current_user.is_anonymous %}
-
+ 
     <h2>Tu pedido</h2>
-
+    {% if total != 0 %}
     <table>
         <thead>
             <tr>
@@ -36,9 +36,12 @@
         </tbody>
         <tfoot>
             <tr>
-                <td>Total: $ {{ total }}</td>
+                <td colspan="5">Total: $ {{ total }}</td>
             </tr>
         </tfoot>
+        {% else %}
+            <h3>Carrito vacío, compra algún producto</h3>
+        {% endif %}
     </table>
 
     <h2>Tus datos</h2>
@@ -49,7 +52,14 @@
     </form>
 
     <button><a href="{{ url_for('public.index') }}">Seguir comprando</a></button>
+    {% if total != 0 %}
+    <button><a href="{{ url_for('carrito.vaciar_carrito') }}">VACIAR CARRITO</a></button>
     <button><a href="{{ url_for('public.confirmacion_pedido')}}">Finalizar compra</a></button>
+    {% endif %}
+
+    <p>*Solo se recibirán pagos en efectivo.</p>
+    <p>Procure tener el monto exacto.</p>
+    
 {% else %}
     <h1>El ADMIN no puede comprar</h1>
 {% endif %}

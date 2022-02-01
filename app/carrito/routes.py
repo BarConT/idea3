@@ -75,13 +75,9 @@ def carrito_delete(id):
     return response
 
 # Vaciar carrito
+@carrito_bp.route('/carrito_vaciar')
+def vaciar_carrito():
+    response = make_response(redirect(url_for('carrito.vista_pedido')))
+    response.set_cookie(('carrito'),"",expires=0)
+    return response
 
-# @carrito_bp.context_processor
-# def contar_carrito():
-# 	if not current_user.is_anonymous:
-# 		return {'num_articulos':0}
-# 	if request.cookies.get('carrito')==None:
-# 		return {'num_articulos':0}
-# 	else:
-# 		datos = json.loads(request.cookies.get(str(current_user.id)))
-# 		return {'num_articulos':len(datos)}

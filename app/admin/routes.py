@@ -30,7 +30,7 @@ def comida_form():
         comida.imagen = image_name
         comida.save()
         return redirect(url_for('public.index'))
-    return render_template('admin/comida_form.html', form=form)
+    return render_template('admin/comida_form.html', form=form, title="Nueva Comida")
 
 
 # Editar Comida
@@ -56,7 +56,7 @@ def editar_comida(id_comida):
         comida.imagen = image_name
         comida.save()
         return redirect(url_for('public.index'))
-    return render_template('admin/comida_edit.html', form=form, comida=comida)
+    return render_template('admin/comida_form.html', form=form, comida=comida, title="Editar Comida")
 
 # Eliminar Comida
 @admin_bp.route("/admin/eliminar/<int:id_comida>/", methods=['POST', 'GET'])
@@ -65,6 +65,7 @@ def eliminar_comida(id_comida):
     if comida is None:
         raise NotFound(id_comida)
     images_dir = current_app.config['COMIDAS_IMAGES_DIR']
-    remove(os.path.join(images_dir, comida.imagen))
+    if comida.imagen:
+        remove(os.path.join(images_dir, comida.imagen))
     comida.delete()
     return redirect(url_for('public.index'))

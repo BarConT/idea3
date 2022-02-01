@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template
+from flask import Flask, render_template, request, json
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -38,9 +38,17 @@ def create_app():
     from .carrito import carrito_bp
     app.register_blueprint(carrito_bp)
  
+    @app.context_processor
+    def contar_carrito():
+        if request.cookies.get('carrito')==None:
+            return {'num_articulos':0}
+        else:
+            num_articulos = json.loads(request.cookies.get('carrito'))
+            return {'num_articulos':len(num_articulos)}
+
     # Manejo de errores personalizados
     register_error_handlers(app)
- 
+
     return app
 
 def register_error_handlers(app):
@@ -52,6 +60,8 @@ def register_error_handlers(app):
     @app.errorhandler(404)
     def error_404_handler(e):
         return render_template('404.html'), 404
+
+
 
     
 
