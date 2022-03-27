@@ -20,7 +20,7 @@ def vista_pedido():
         comidas.append(Comida.query.get(comida["id"]))
         cantidades.append(comida["cantidad"])
         total=total+Comida.query.get(comida["id"]).precio*comida["cantidad"]
-        pedido += str(comida['cantidad']) + ' de ' + str(comidaEncargada) + ' ' 
+        pedido += str(comida['cantidad']) + ' ' + str(comidaEncargada) + ' ' 
     comidas=zip(comidas,cantidades)
 
     if request.method == 'POST':

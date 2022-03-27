@@ -21,7 +21,7 @@
     <button><a href="{{ url_for('carrito.vista_pedido') }}">Atrás</a></button>
 
     {% set numero = '+5493463647840' -%}
-    {% set mensaje = 'Hola%2C+estoy+interesado+en+' + pedido + 'mi+direccion+es+' + datos['direccion'] -%}
+    {% set mensaje = 'Hola%2C+soy+' + datos['nombre'] + '. Estoy+interesado+en+' + pedido + '. Mi+dirección+es+' + datos['direccion'] + '. Gracias.' -%}
 
     <button><a href="https://api.whatsapp.com/send?phone={{ numero }}&text={{ mensaje }}" target="blank">Confirmar pedido</a></button>
 
